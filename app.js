@@ -52,68 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
     counters.forEach(el => cio.observe(el));
   }
 
-  /* ── 5. Quote form validation ── */
-  const quoteForm = document.getElementById('quoteForm');
-  if (quoteForm) {
-    quoteForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let valid = true;
-      quoteForm.querySelectorAll('[required]').forEach(field => {
-        if (!field.value.trim()) {
-          field.classList.add('is-invalid');
-          valid = false;
-        } else {
-          field.classList.remove('is-invalid');
-          field.classList.add('is-valid');
-        }
-      });
-      if (valid) {
-        const btn = quoteForm.querySelector('[type=submit]');
-        btn.textContent = '✓ Request Sent!';
-        btn.disabled = true;
-        btn.style.background = '#25D366';
-        setTimeout(() => {
-          btn.textContent = 'Send Request';
-          btn.disabled = false;
-          btn.style.background = '';
-          quoteForm.reset();
-          quoteForm.querySelectorAll('.is-valid').forEach(f => f.classList.remove('is-valid'));
-        }, 4000);
-      }
-    });
-  }
 
-  /* ── 6. Contact form validation ── */
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let valid = true;
-      contactForm.querySelectorAll('[required]').forEach(field => {
-        if (!field.value.trim()) {
-          field.classList.add('is-invalid');
-          valid = false;
-        } else {
-          field.classList.remove('is-invalid');
-          field.classList.add('is-valid');
-        }
-      });
-      if (valid) {
-        const btn = contactForm.querySelector('[type=submit]');
-        btn.textContent = '✓ Message Sent!';
-        btn.disabled = true;
-        btn.style.background = '#25D366';
-        setTimeout(() => {
-          btn.textContent = 'Send Message';
-          btn.disabled = false;
-          btn.style.background = '';
-          contactForm.reset();
-          contactForm.querySelectorAll('.is-valid').forEach(f => f.classList.remove('is-valid'));
-        }, 4000);
-      }
-    });
-  }
-
+  
   /* ── 7. Gallery filter (projects page) ── */
   const filterBtns = document.querySelectorAll('.filter-btn');
   const galleryItems = document.querySelectorAll('.gallery-filter-item');
@@ -148,3 +88,93 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+(function () {
+
+  /* ── Toast helpers ── */
+  function showToast() {
+    var t = document.getElementById('formToast');
+    t.style.opacity = '1';
+    t.style.transform = 'translateX(-50%) translateY(0)';
+    t.style.pointerEvents = 'auto';
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(hideToast, 5000);
+  }
+
+  window.hideToast = function () {
+    var t = document.getElementById('formToast');
+    t.style.opacity = '0';
+    t.style.transform = 'translateX(-50%) translateY(120%)';
+    t.style.pointerEvents = 'none';
+  };
+
+  /* ── Form submit handler ── */
+  var form = document.getElementById('universalContactForm');
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // stop default navigation
+
+    /* — Client-side validation — */
+    var valid = true;
+    form.querySelectorAll('[required]').forEach(function (field) {
+      if (!field.value.trim()) {
+        field.classList.add('is-invalid');
+        valid = false;
+      } else {
+        field.classList.remove('is-invalid');
+      }
+    });
+    if (!valid) return;
+
+    /* — Button loading state — */
+    var btn     = document.getElementById('universalSubmitBtn');
+    var btnText = document.getElementById('universalBtnText');
+    btn.disabled       = true;
+    btn.style.opacity  = '.7';
+    btnText.textContent = 'Sending…';
+
+    /* — Submit to Formspree via fetch (no redirect) — */
+    var data = new FormData(form);
+
+    fetch(form.action, {
+      method:  'POST',
+      body:    data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function (res) {
+      if (res.ok) {
+        /* ✅ Success */
+        showToast();
+        form.reset();
+        form.querySelectorAll('.is-invalid').forEach(function (f) {
+          f.classList.remove('is-invalid');
+        });
+      } else {
+        /* ⚠️ Formspree returned an error */
+        return res.json().then(function (data) {
+          var msg = (data && data.errors)
+            ? data.errors.map(function (e) { return e.message; }).join(', ')
+            : 'Something went wrong. Please try again.';
+          alert(msg);
+        });
+      }
+    })
+    .catch(function () {
+      alert('Network error. Please check your connection and try again.');
+    })
+    .finally(function () {
+      btn.disabled       = false;
+      btn.style.opacity  = '1';
+      btnText.textContent = 'Send Message';
+    });
+  });
+
+  /* — Remove invalid state on input — */
+  form.querySelectorAll('input, textarea, select').forEach(function (field) {
+    field.addEventListener('input', function () {
+      if (field.value.trim()) field.classList.remove('is-invalid');
+    });
+  });
+
+})();

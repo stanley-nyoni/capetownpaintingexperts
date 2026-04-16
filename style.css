@@ -214,6 +214,27 @@ h1,h2,h3,h4,h5 { line-height: 1.1; }
   padding: .5rem 0;
   box-shadow: 0 12px 40px rgba(0,0,0,.4);
 }
+
+/* ═══ MOBILE NAVBAR FIX ═══ */
+@media (max-width: 991px) {
+
+  /* Reduce overall menu padding */
+  .navbar-collapse {
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  .nav-link-cte {
+    padding-bottom: 0.45rem !important;
+  }
+
+  .nav-cta-btn{
+    margin-top: 0.5rem;
+  }
+
+
+}
+
 .dropdown-item-cte {
   font-family: var(--font-cond);
   font-weight: 500;
@@ -360,8 +381,8 @@ h1,h2,h3,h4,h5 { line-height: 1.1; }
 
 /* ── Trust / Why Us ── */
 .trust-item {
-  display: flex; gap: 1.2rem; align-items: flex-start;
-  padding: 1.5rem;
+  display: flex; gap: .2rem; align-items: flex-start;
+  padding: .5rem;
   background: rgba(255,255,255,.04);
   border-left: 4px solid var(--orange);
   border-radius: 0 var(--radius) var(--radius) 0;
@@ -709,3 +730,170 @@ footer {
   .btn-primary-cte, .btn-outline-cte, .btn-wa, .btn-call { padding: .75rem 1.4rem; font-size: .92rem; }
   footer { padding: 3rem 0 0; }
 }
+
+
+ /* ── Area Cards ── */
+  .area-region-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: .06em;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    padding-bottom: .6rem;
+    border-bottom: 3px solid var(--orange);
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+  .area-region-title i { color: var(--orange); font-size: 1.1rem; }
+
+  .suburb-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+  }
+  .suburb-list li {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: .94rem;
+    color: var(--grey-dark);
+    padding: .5rem .8rem;
+    border-radius: var(--radius);
+    transition: background var(--transition), color var(--transition);
+    cursor: default;
+  }
+  .suburb-list li:hover {
+    background: rgba(232,130,12,.08);
+    color: var(--navy);
+  }
+  .suburb-list li i {
+    color: var(--orange);
+    font-size: .72rem;
+    flex-shrink: 0;
+  }
+
+  .area-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.8rem 1.6rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,.08);
+    border-top: 4px solid var(--orange);
+    height: 100%;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .area-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* ── Map container ── */
+  .map-wrapper {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    border: 4px solid var(--white);
+    outline: 1px solid var(--grey-lt);
+  }
+  .map-wrapper iframe {
+    display: block;
+    width: 100%;
+    height: 480px;
+    border: none;
+  }
+
+  /* ── FAQ ── */
+  .faq-item {
+    border-bottom: 1px solid var(--grey-lt);
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 1.3rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    font-family: var(--font-cond);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: .04em;
+    color: var(--navy);
+    transition: color var(--transition);
+  }
+  .faq-btn:hover { color: var(--orange); }
+  .faq-btn .faq-icon {
+    width: 32px; height: 32px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white);
+    font-size: .8rem;
+    flex-shrink: 0;
+    transition: transform var(--transition), background var(--transition);
+  }
+  .faq-btn[aria-expanded="true"] .faq-icon {
+    transform: rotate(45deg);
+    background: var(--navy);
+  }
+  .faq-btn[aria-expanded="true"] { color: var(--orange); }
+  .faq-body {
+    padding: 0 0 1.3rem 0;
+    font-size: .95rem;
+    color: var(--grey-dark);
+    line-height: 1.75;
+    max-width: 720px;
+  }
+
+  /* ── Coverage badge ── */
+  .coverage-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: rgba(232,130,12,.1);
+    border: 1px solid rgba(232,130,12,.35);
+    color: var(--orange);
+    font-family: var(--font-cond);
+    font-weight: 700;
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: .3rem .9rem;
+    border-radius: 50px;
+  }
+
+  /* ── Distance zones ── */
+  .zone-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    margin-bottom: .7rem;
+    background: var(--off-white);
+  }
+  .zone-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .zone-name {
+    font-family: var(--font-cond);
+    font-weight: 700;
+    font-size: .9rem;
+    letter-spacing: .06em;
+    color: var(--navy);
+    flex: 1;
+  }
+  .zone-dist {
+    font-size: .82rem;
+    color: var(--grey);
+    white-space: nowrap;
+  }
