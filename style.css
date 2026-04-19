@@ -699,6 +699,36 @@ footer {
   50%      { box-shadow: 0 8px 50px rgba(37,211,102,.8); }
 }
 
+/* ── Floating Call button ── */
+.float-call {
+  position: fixed;
+  bottom: 6.5rem; 
+  right: 2rem; 
+  width: 58px; 
+  height: 58px;
+  background: #007bff; /* blue for calls */
+  border-radius: 50%;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  color: var(--white);
+  font-size: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0,123,255,.5);
+  z-index: 9999;
+  transition: all var(--transition);
+  animation: float-pulse-call 2.5s ease-in-out infinite;
+}
+
+.float-call:hover { 
+  transform: scale(1.1); 
+  color: var(--white); 
+}
+
+@keyframes float-pulse-call {
+  0%,100% { box-shadow: 0 8px 30px rgba(0,123,255,.5); }
+  50%      { box-shadow: 0 8px 50px rgba(0,123,255,.8); }
+}
+
 /* ── Feature badge ── */
 .feature-badge {
   display: inline-flex; align-items: center; gap: .4rem;
