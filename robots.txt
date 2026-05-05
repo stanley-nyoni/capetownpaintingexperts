@@ -1,0 +1,13 @@
+# robots.txt — Cape Town Painting Experts
+# https://www.paintingexpertscapetown.co.za
+
+User-agent: *
+Allow: /
+
+# Block any assets or directories you don't want indexed
+Disallow: /images/
+Disallow: /style.css
+Disallow: /app.js
+
+# Sitemap location
+Sitemap: https://www.paintingexpertscapetown.co.za/sitemap.xml

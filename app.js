@@ -2,7 +2,37 @@
    Cape Town Painting Experts — app.js
    ============================================================ */
 
+/* ============================================================
+   Google Ads Conversion Tracking – AW-18123515810
+   Tracks: phone calls, WhatsApp clicks, form submissions
+   ============================================================ */
+
+function gtagConversion() {
+  if (typeof gtag === 'function') {
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18123515810'
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+
+  /* ── Track all phone call clicks ── */
+  document.querySelectorAll('a[href^="tel:"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      gtagConversion();
+      gtag('event', 'click', { 'event_category': 'Phone Call', 'event_label': link.href });
+    });
+  });
+
+  /* ── Track all WhatsApp clicks ── */
+  document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      gtagConversion();
+      gtag('event', 'click', { 'event_category': 'WhatsApp', 'event_label': 'WhatsApp Click' });
+    });
+  });
+
 
   /* ── 1. Sticky nav shadow ── */
   const nav = document.getElementById('mainNav');
@@ -145,6 +175,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(function (res) {
       if (res.ok) {
         /* ✅ Success */
+        gtagConversion();
+        gtag('event', 'submit', { 'event_category': 'Form', 'event_label': 'Contact Form Submitted' });
         showToast();
         form.reset();
         form.querySelectorAll('.is-invalid').forEach(function (f) {

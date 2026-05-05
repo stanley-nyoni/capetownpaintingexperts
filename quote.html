@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18123515810"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18123515810');
+  </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get a Free Quote | Cape Town Painting Experts</title>
@@ -8,6 +16,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
+<meta property="og:title" content="Get a Free Quote | Cape Town Painting Experts">
+<meta property="og:description" content="Get a free, no-obligation quote from Cape Town Painting Experts. Painting, paving, construction, renovations, handyman and gardening services.">
+<meta property="og:image" content="https://www.paintingexpertscapetown.co.za/cp-logo.png">
+<meta property="og:url" content="https://www.paintingexpertscapetown.co.za/quote.html">
 </head>
 <body>
 
@@ -59,6 +71,55 @@
     <p>Fill in the form below and we'll send you a detailed, itemised quote.</p>
   </div>
 </div>
+
+      <!-- ── Toast Notification ── -->
+  <div id="formToast" style="
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  z-index: 99999;
+  background: var(--navy);
+  color: var(--white);
+  border-left: 5px solid #25D366;
+  border-radius: var(--radius);
+  padding: 1rem 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  min-width: 300px;
+  max-width: 480px;
+  transition: transform .45s cubic-bezier(.4,0,.2,1), opacity .45s ease;
+  opacity: 0;
+  pointer-events: none;
+">
+    <div style="
+    width: 40px; height: 40px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  ">✓</div>
+    <div>
+      <div
+        style="font-family:var(--font-cond);font-weight:700;letter-spacing:.06em;font-size:.95rem;margin-bottom:.15rem;">
+        Message Sent Successfully!</div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.65);">We'll get back to you within 24 hours.</div>
+    </div>
+    <button onclick="hideToast()" style="
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,.45);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0 0 0 .5rem;
+    line-height: 1;
+    transition: color .2s;
+  " onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">&times;</button>
+  </div>
 
 <!-- ═══ QUOTE FORM ═══ -->
 <section class="section-pad bg-off-white">
@@ -117,106 +178,94 @@
         </div>
       </div>
 
-      <!-- Quote Form -->
-      <div class="col-lg-8 fade-up">
-        <div style="background:var(--white);border-radius:var(--radius);padding:2.5rem;border-top:4px solid var(--orange);box-shadow:0 8px 40px rgba(0,0,0,.1);">
-          <h3 style="font-family:var(--font-display);font-size:1.9rem;color:var(--navy);letter-spacing:.04em;margin-bottom:.3rem;">Quote Request Form</h3>
-          <p class="text-muted mb-4">The more detail you provide, the more accurate your quote will be.</p>
+        <!-- RIGHT — Form -->
+        <div class="col-lg-8 fade-up">
+          <div style="
+          background: var(--white);
+          border-radius: var(--radius);
+          padding: 2.4rem 2.2rem;
+          box-shadow: 0 8px 40px rgba(0,0,0,.1);
+          border-top: 4px solid var(--orange);
+        ">
+            <h3
+              style="font-family:var(--font-display);font-size:1.65rem;color:var(--navy);letter-spacing:.04em;margin-bottom:.3rem;">
+              Send Us a Message
+            </h3>
+            <p style="color:var(--grey);font-size:.88rem;margin-bottom:1.8rem;">
+              All fields marked <span style="color:var(--orange);">*</span> are required. We respond within 24 hours.
+            </p>
 
-          <form id="quoteForm" class="form-cte" novalidate>
-            <div class="row g-3">
+            <form id="universalContactForm" action="https://formspree.io/f/maqadynv" method="POST"
+              class="form-cte" novalidate>
+              <!-- Formspree: prevent redirect -->
+              <input type="hidden" name="_next" value="false" />
 
-              <div class="col-md-6">
-                <label class="form-label">Full Name <span style="color:var(--orange);">*</span></label>
-                <input type="text" class="form-control" placeholder="John Smith" required>
-                <div class="invalid-feedback">Please enter your full name.</div>
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <label class="form-label">
+                    Your Name <span style="color:var(--orange);">*</span>
+                  </label>
+                  <input type="text" name="name" class="form-control" placeholder="John Smith" required />
+                  <div class="invalid-feedback">Please enter your name.</div>
+                </div>
+
+                <div class="col-sm-6">
+                  <label class="form-label">
+                    Phone / WhatsApp <span style="color:var(--orange);">*</span>
+                  </label>
+                  <input type="tel" name="phone" class="form-control" placeholder="082 000 0000" required />
+                  <div class="invalid-feedback">Please enter your phone number.</div>
+                </div>
+
+                <div class="col-sm-6">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" name="email" class="form-control" placeholder="john@example.com" />
+                </div>
+
+                <div class="col-sm-6">
+                  <label class="form-label">Service Needed</label>
+                  <select name="service" class="form-select">
+                    <option value="">Select a service...</option>
+                    <option>Painting</option>
+                    <option>Paving</option>
+                    <option>Construction</option>
+                    <option>Renovations</option>
+                    <option>Handyman</option>
+                    <option>Gardening</option>
+                    <option>Multiple Services</option>
+                    <option>General Enquiry</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">
+                    Your Message <span style="color:var(--orange);">*</span>
+                  </label>
+                  <textarea name="message" class="form-control" rows="4"
+                    placeholder="Tell us about your project or ask us anything..." required></textarea>
+                  <div class="invalid-feedback">Please enter your message.</div>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" id="universalSubmitBtn" class="btn-primary-cte w-100 justify-content-center"
+                    style="border:none;padding:1rem;font-size:1rem;">
+                    <i class="fas fa-paper-plane"></i>
+                    <span id="universalBtnText">Send Message</span>
+                  </button>
+                </div>
+
+                <div class="col-12">
+                  <p style="text-align:center;color:var(--grey);font-size:.78rem;margin:0;">
+                    <i class="fas fa-lock me-1" style="color:var(--orange);"></i>
+                    Your details are private and will never be shared with third parties.
+                  </p>
+                </div>
+
               </div>
+            </form>
 
-              <div class="col-md-6">
-                <label class="form-label">Phone / WhatsApp <span style="color:var(--orange);">*</span></label>
-                <input type="tel" class="form-control" placeholder="082 000 0000" required>
-                <div class="invalid-feedback">Please enter your phone number.</div>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-control" placeholder="john@email.com">
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Location / Area <span style="color:var(--orange);">*</span></label>
-                <input type="text" class="form-control" placeholder="e.g. Stellenbosch, Paarl" required>
-                <div class="invalid-feedback">Please enter your area.</div>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Service Required <span style="color:var(--orange);">*</span></label>
-                <select class="form-select" required>
-                  <option value="">Select a service...</option>
-                  <option>Painting — Interior</option>
-                  <option>Painting — Exterior</option>
-                  <option>Painting — Interior &amp; Exterior</option>
-                  <option>Paving — Driveway</option>
-                  <option>Paving — Patio / Pathway</option>
-                  <option>Construction — New Build</option>
-                  <option>Construction — Extension</option>
-                  <option>Construction — Boundary Wall</option>
-                  <option>Renovations — Kitchen</option>
-                  <option>Renovations — Bathroom</option>
-                  <option>Renovations — Full Home</option>
-                  <option>Handyman Services</option>
-                  <option>Gardening / Landscaping</option>
-                  <option>Multiple Services</option>
-                </select>
-                <div class="invalid-feedback">Please select a service.</div>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Property Type</label>
-                <select class="form-select">
-                  <option value="">Select...</option>
-                  <option>House</option>
-                  <option>Townhouse / Complex</option>
-                  <option>Apartment</option>
-                  <option>Commercial Property</option>
-                  <option>Estate / Farm</option>
-                </select>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Estimated Budget</label>
-                <select class="form-select">
-                  <option value="">Select a range...</option>
-                  <option>Under R5,000</option>
-                  <option>R5,000 – R15,000</option>
-                  <option>R15,000 – R50,000</option>
-                  <option>R50,000 – R150,000</option>
-                  <option>R150,000+</option>
-                  <option>Not sure yet</option>
-                </select>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Preferred Start Date</label>
-                <input type="date" class="form-control">
-              </div>
-
-              <div class="col-12">
-                <label class="form-label">Project Description <span style="color:var(--orange);">*</span></label>
-                <textarea class="form-control" rows="5" placeholder="Describe your project in as much detail as possible..." required></textarea>
-                <div class="invalid-feedback">Please describe your project.</div>
-              </div>
-
-              <div class="col-12">
-                <button type="submit" class="btn-primary-cte w-100 justify-content-center" style="border:none;padding:1rem 2rem;font-size:1.05rem;">
-                  <i class="fas fa-paper-plane"></i> Send Request
-                </button>
-              </div>
-
-            </div>
-          </form>
+          </div>
         </div>
-      </div>
 
     </div>
   </div>
